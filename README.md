@@ -11,5 +11,5 @@ We will go through the concept of react days for 30day and learn react some of t
 
 * main - Main branch.
 
-feature/callbackhook - Related callback hook
-feature/usememo - Related to memo
+1. feature/callbackhook - Related callback hook
+2. feature/usememo - Related to memo
