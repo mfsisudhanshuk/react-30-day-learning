@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+## useCallback 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The `useCallback` hook in React is used to memoize (or cache) a function definition between re-renders . This can be particularly useful for optimizing performance in certain scenarios.
 
-## Available Scripts
+Here's a breakdown of what `useCallback` does and its use cases:
 
-In the project directory, you can run:
+1. Purpose:
 
-### `npm start`
+1. `useCallback` returns a memoized version of the callback function that only changes if one of the dependencies has changed .
+2. It helps in preventing unnecessary re-renders of child components that depend on callback functions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Use cases:
 
-### `npm test`
+1. When passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders.
+2. When you want to avoid recreating functions on every render, especially if those functions are used in useEffect dependencies of child components.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In this example:
 
-### `npm run build`
+1. We have a main `CallbackExample` component and a child `ExpensiveComputationComponent`.
+2. The `ExpensiveComputationComponent` is wrapped in `React.memo()`, which means it will only re-render if its props change.
+3. We use `useCallback` to memoize the `compute` function that we pass to `ExpensiveComputationComponent`. This function depends on the `count` state.
+4. The `memoizedCallback` will only be recreated when `count` changes, not when `otherCount` changes.
+5. This setup ensures that `Expensive`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Key Differences: `useCallback` vs `React.memo`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+| **Feature**         | **`useCallback`**                                            | **`React.memo`**                                  |
+|---------------------|-------------------------------------------------------------|--------------------------------------------------|
+| **Purpose**         | Memoizes functions to maintain reference equality.          | Memoizes the rendered output of a component.     |
+| **Optimization Scope** | Used within a component to avoid recreating functions.       | Used on components to avoid unnecessary re-renders. |
+| **Usage**           | Applied to functions passed as props or used as dependencies. | Applied to entire components.                   |
+| **Prevents**        | New function references on every render.                    | Re-rendering of components with unchanged props. |
+| **Dependencies**    | Requires a dependency array to determine when to update the memoized function. | Re-renders based on shallow comparison of props. |
