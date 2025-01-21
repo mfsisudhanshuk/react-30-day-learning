@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback } from "react"
 
-function App() {
+
+// This is a child component that receives a callback
+const ExpensiveComputationComponent = React.memo(({ compute }) => {
+  console.log("ExpensiveComputationComponent rendered")
+  return <button onClick={compute}>Compute</button>
+})
+
+export default function CallbackExample() {
+  const [count, setCount] = useState(0)
+  const [otherCount, setOtherCount] = useState(0)
+
+  // This callback is memoized and will only change if `count` changes
+  const memoizedCallback = useCallback(() => {
+    console.log(`Expensive computation performed with count: ${count}`)
+    // Imagine some expensive computation here
+  }, [count])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="p-4 space-y-4">
+      <h1 className="text-2xl font-bold">useCallback Example</h1>
+      <p>Count: {count}</p>
+      <p>Other Count: {otherCount}</p>
+      <button onClick={() => setCount(count + 1)}>Increment Count</button>
+      <button onClick={() => setOtherCount(otherCount + 1)}>Increment Other Count</button>
+      <ExpensiveComputationComponent compute={memoizedCallback} />
     </div>
-  );
+  )
 }
 
-export default App;
