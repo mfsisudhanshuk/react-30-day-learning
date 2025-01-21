@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, memo } from "react"
 
-function App() {
+// A simple component that we'll memoize
+const ExpensiveComponent = memo(function ExpensiveComponent({ value }: { value: number }) {
+  console.log("Rendering ExpensiveComponent")
+  // Simulate some expensive computation
+  let result = 0
+  for (let i = 0; i < 1000000; i++) {
+    result += value
+  }
+  return <div>Result: {result}</div>
+})
+
+export default function SimpleExample() {
+  const [count, setCount] = useState(0)
+  const [value, setValue] = useState(1)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Simple Memo Example</h2>
+      <button onClick={() => setCount(count + 1)}>Increment Count: {count}</button>
+      <button onClick={() => setValue(value + 1)}>Change Value: {value}</button>
+      <ExpensiveComponent value={value} />
     </div>
-  );
+  )
 }
-
-export default App;

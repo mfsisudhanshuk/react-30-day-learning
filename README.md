@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+What is memo and its benefit , example (branch - learning/memo)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Memo is a higher-order component in React that’s used for performance optimization.Its designed to memoize functional components, which means it can prevent unnecessary re-renders of components when their props haven’t changed.
 
-## Available Scripts
+Uses :- 
 
-In the project directory, you can run:
+Performance optimization - It helps reduce unnecessary re-renders, which can improve the overall performance of your react application.
+Predictable rendering - It ensures that a component only re-renders when its props change, making the rendering behaviour more predictable.
+Reduced Computation - For components with expensive rendering logic , memo can significantly reduce the amount of computation needed.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Summary :- 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`memo` is most effective for components with expensive rendering logic.
+When using `memo`, be aware of object and function props. You might need to combine it with `useMemo` and `useCallback` for full effectiveness.
+Don't use `memo` indiscriminately. For simple components, the overhead of memoization might be more than the performance gain.
+Always measure performance before and after applying `memo` to ensure it's actually improving your application's performance.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Code sample
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javescript
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+import React, { useState, memo } from "react"
 
-### `npm run eject`
+// A simple component that we'll memoize
+const ExpensiveComponent = memo(function ExpensiveComponent({ value }: { value: number }) {
+  console.log("Rendering ExpensiveComponent")
+  // Simulate some expensive computation
+  let result = 0
+  for (let i = 0; i < 1000000; i++) {
+    result += value
+  }
+  return <div>Result: {result}</div>
+})
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+export default function SimpleExample() {
+  const [count, setCount] = useState(0)
+  const [value, setValue] = useState(1)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  return (
+    <div>
+      <h2>Simple Memo Example</h2>
+      <button onClick={() => setCount(count + 1)}>Increment Count: {count}</button>
+      <button onClick={() => setValue(value + 1)}>Change Value: {value}</button>
+      <ExpensiveComponent value={value} />
+    </div>
+  )
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
