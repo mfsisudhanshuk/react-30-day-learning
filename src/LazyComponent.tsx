@@ -1,7 +1,7 @@
 import React, { useState, lazy, Suspense } from "react"
-import HeavyComponent from "./HeavyComponent.tsx"
+// import HeavyComponent from "./HeavyComponent.tsx"
 // Lazy load the HeavyComponent
-// const HeavyComponent = lazy(() => import("./HeavyComponent.tsx"))
+const HeavyComponent = lazy(() => import("./HeavyComponent.tsx"))
 
 export default function LazyLoadingExample() {
   const [showHeavyComponent, setShowHeavyComponent] = useState(false)
@@ -14,9 +14,9 @@ export default function LazyLoadingExample() {
       </button>
 
       {showHeavyComponent && (
-        <Suspense fallback={<div>Loading...</div>}>
+         <Suspense fallback={<div>Loading...</div>}>
           <HeavyComponent />
-        </Suspense>
+         </Suspense>
       )}
     </div>
   )
