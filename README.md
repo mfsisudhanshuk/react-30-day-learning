@@ -1,15 +1,11 @@
-## 30 days learning react
-
-We will go through the concept of react days for 30day and learn react some of the key concepts of react.
-
-## How to use 
-
-- Check the branches for videos and code sample.
+## Useref
 
 
-## BRANCH LIST
+The useRef hook in React is a versatile and powerful tool that allows you to manage mutable references to elements or values without triggering re-renders. It is primarily used for accessing the DOM directly, storing mutable variables across renders, and maintaining references to values or elements.
 
-* main - Main branch.
+### These examples demonstrate the versatility and importance of `useRef` in React applications. It's particularly useful for:
 
-1. feature/callbackhook - Related callback hook
-2. feature/usememo - Related to memo
+1. Direct DOM manipulation without causing re-renders
+2. Storing mutable values that persist across renders
+3. Keeping track of values from previous renders
+4. Managing timers and intervals efficiently
