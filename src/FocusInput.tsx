@@ -5,7 +5,11 @@ export default function FocusInput() {
 
   const handleFocus = () => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      if (inputRef.current.value === "") {
+        inputRef.current.focus();
+      } else {
+        alert("Input is not empty");
+      }
     }
   };
 
