@@ -12,4 +12,9 @@ We will go through the concept of react days for 30day and learn react some of t
 * main - Main branch.
 
 1. feature/callbackhook - Related callback hook
-2. feature/usememo - Related to memo
+2. feature/data-infinite-loading
+3. feature/hoc
+4. feature/lazy-loading
+5. feature/ref-hook
+6. feature/usememo
+
