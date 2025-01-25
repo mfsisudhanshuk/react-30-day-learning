@@ -1,15 +1,19 @@
-## 30 days learning react
-
-We will go through the concept of react days for 30day and learn react some of the key concepts of react.
-
-## How to use 
-
-- Check the branches for videos and code sample.
+## Infite scroll feature
 
 
-## BRANCH LIST
+## Key Points in the Code:
+> Fetching Data:
 
-* main - Main branch.
+- The fetchPosts function fetches 10 posts at a time using the _limit and _page query parameters.
+- `Infinite Scrolling`:
 
-1. feature/callbackhook - Related callback hook
-2. feature/usememo - Related to memo
+- The handleScroll function checks if the user is near the bottom of the page and increments the page state to fetch more data.
+- State Management:
+
+posts: Stores the fetched posts.
+page: Tracks the current page.
+loading: Prevents multiple simultaneous requests.
+hasMore: Tracks whether more data is available.
+Cleanup:
+
+- The useEffect hook ensures that the scroll event listener is cleaned up to prevent memory leaks.
