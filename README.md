@@ -9,3 +9,5 @@ The useRef hook in React is a versatile and powerful tool that allows you to man
 2. Storing mutable values that persist across renders
 3. Keeping track of values from previous renders
 4. Managing timers and intervals efficiently
+
+[DOC LINK](https://react.dev/learn/manipulating-the-dom-with-refs)
