@@ -1,20 +1,72 @@
-## 30 days learning react
-
-We will go through the concept of react days for 30day and learn react some of the key concepts of react.
-
-## How to use 
-
-- Check the branches for videos and code sample.
+## Context API
 
 
-## BRANCH LIST
+A way to pass data through the component tree without having to pass props down manually at every level.
 
-* main - Main branch.
+1. Context Creation: 
+createContext : Create a context object.
+ `export const bicontext = createContext():```
 
-1. feature/callbackhook - Related callback hook
-2. feature/data-infinite-loading
-3. feature/hoc
-4. feature/lazy-loading
-5. feature/ref-hook
-6. feature/usememo
+2.Provider : 
 
+Provider : A component that provides the context value to its children.
+
+3. Consumer : Component can access context values using the useContext hooks.
+
+useContext(Consumer) : A hook that allows you to consume a context.
+
+
+// Setup
+
+1. Creation
+```
+import React, { createContext } from "react";
+
+const MyContext = createContext(); // Default value can be provided here.
+
+
+```
+
+2. Provider
+
+```
+export const MyProvider = ({ children }) => {
+  const sharedState = { user: "John Doe", isLoggedIn: true };
+
+  return (
+    <MyContext.Provider value={sharedState}>
+      {children}
+    </MyContext.Provider>
+  );
+};
+
+
+```
+
+3. Consumer 
+
+```
+
+import React, { useContext } from "react";
+import { MyContext } from "./MyContext";
+
+const MyComponent = () => {
+  const context = useContext(MyContext);
+
+  return <div>User: {context.user}</div>;
+};
+
+
+```
+
+###Best practices 
+1. Avoid overuse - 
+2. Split context
+3. Memoize values 
+
+
+##Primary uses 
+1. Avoids props drilling
+2. Globals state management
+3. Dynamic configureation
+4. Dependency Injection
