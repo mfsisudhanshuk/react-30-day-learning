@@ -59,13 +59,15 @@ const MyComponent = () => {
 
 ```
 
-###Best practices 
-1. Avoid overuse - 
-2. Split context
-3. Memoize values 
+### Best practices 
+1. Avoid overuse -  Don't use Context API for all state managementl it's better suited for global or shared state
+2. Split context - For large applications, use multiple contexts for different domains (e.g., authentication, theme).
+3. Memoize values - Use `useMemo` or `callback` to avoid unnecessary re-renders when the context value changes.
 
 
-##Primary uses 
+
+
+## Primary uses 
 1. Avoids props drilling
 2. Globals state management
 3. Dynamic configureation
